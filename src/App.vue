@@ -7,9 +7,14 @@
   <h3 class="bg-yellow" :style="textRed">{{ movie.title }}</h3>
   <p>개봉: {{ movie.year }}</p>
   <p>장르: {{ movie.category }}</p>
+  <!-- v-on:이벤트명="실행코드, v-on 축약식: @로 대체 가능 -->
+  <!-- 코드가 짧을 경우 바로 추가 -->
+  <!-- <button @:click="like++">좋아요</button> <span>{{ like }}</span> -->
+  <!-- 버튼을 눌렀을 때 인덱스 값을 전달해야 함 -->
+  <button @:click="increaseLike(i)">좋아요</button> <span>{{ movie.like }}</span>
 </div>
   <!-- 반복문(배열의 자료명, 인덱스) -->
-  <!--  <p v-for="(item, i) in foods" :key="i">{{ item }}</p>-->
+  <!-- <p v-for="(item, i) in foods" :key="i">{{ item }}</p> -->
 </template>
 
 
@@ -23,21 +28,30 @@ export default { // 안에 기능 정의
           title: "노랑",
           year: 2023,
           category: "액션, 드라마",
-          textRed: "color: red"
+          textRed: "color: red",
+          like: 0,
         },
         {
           title: "아쿠아맨과 로스트 킹덤",
           year: 2023,
           category: "액션, 판타지, 어드벤처",
-          textRed: "color: red"
+          textRed: "color: red",
+          like: 0,
         },
         {
           title: "아쿠아맨과 로스트 킹덤",
           year: 2023,
           category: "액션, 판타지, 어드벤처",
-          textRed: "color: red"
+          textRed: "color: red",
+          like: 0,
         },
       ]
+    }
+  },
+  methods: { // 함수 추가 가능
+    increaseLike(i) {
+      // 객체 안에 있는 like 변수를 찾아야 , 객체 내부에서 사용하는 변수는 앞에 this를 붙여야 함
+      this.data[i].like += 1
     }
   }
 }
