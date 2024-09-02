@@ -46,9 +46,13 @@ export default { // 안에 기능 정의
     }
   },
   methods: { // 함수 추가 가능
-    increaseLike(i) {
+    increaseLike(id) {
       // 객체 안에 있는 like 변수를 찾아야 , 객체 내부에서 사용하는 변수는 앞에 this를 붙여야 함
-      this.data[i].like += 1
+      this.data.find(movie => {
+        if(movie.id === id) {
+          movie.like += 1;
+        }
+      })
     },
     searchMovie(title) {
       // 영화 제목이 포함된 데이터를 가져옴

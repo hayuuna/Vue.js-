@@ -2,7 +2,7 @@
   <div class="container">
     <h1>영화정보</h1>
     <!-- 반복문(배열의 자료명, 인덱스) -->
-    <div v-for="(movie, i) in data" :key="i" class="item">
+    <div v-for="(movie) in data" :key="movie.id" class="item">
       <figure>
         <img :src="`${movie.imgUrl}`" :alt="movie.title">
       </figure>
@@ -16,11 +16,11 @@
         <!-- 코드가 짧을 경우 바로 추가 -->
         <!-- <button @:click="like++">좋아요</button> <span>{{ like }}</span> -->
         <!-- 버튼을 눌렀을 때 인덱스 값을 전달해야 함 -->
-        <button @:click="$emit('increaseLike', i)">좋아요</button>
+        <button @:click="$emit('increaseLike', movie.id)">좋아요</button>
         <span>{{ movie.like }}</span>
         <p>
           <button
-              @click="$emit('openModal', i)">상세보기</button>
+              @click="$emit('openModal', movie.id)">상세보기</button>
         </p>
       </div>
     </div>
