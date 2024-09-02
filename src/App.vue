@@ -1,20 +1,35 @@
 <template>
-<!--  데이터 바인딩 : html 안에 데이터를 넣는것-->
-<h1>영화정보</h1>
-<div v-for="(movie, i) in data" :key="i">
-<!-- 데이터를 표시할 때 중괄호 두개 -->
-<!-- 속성에 값을 바인딩할 때 앞에 콜론(:)을 붙여주면 됨 :속성명="데이터" -->
-  <h3 class="bg-yellow" :style="textRed">{{ movie.title }}</h3>
-  <p>개봉: {{ movie.year }}</p>
-  <p>장르: {{ movie.category }}</p>
-  <!-- v-on:이벤트명="실행코드, v-on 축약식: @로 대체 가능 -->
-  <!-- 코드가 짧을 경우 바로 추가 -->
-  <!-- <button @:click="like++">좋아요</button> <span>{{ like }}</span> -->
-  <!-- 버튼을 눌렀을 때 인덱스 값을 전달해야 함 -->
-  <button @:click="increaseLike(i)">좋아요</button> <span>{{ movie.like }}</span>
-</div>
+  <!--  데이터 바인딩 : html 안에 데이터를 넣는것-->
+  <h1>영화정보</h1>
+  <div v-for="(movie, i) in data" :key="i" class="item">
+    <figure>
+      <img :src="`${movie.imgUrl}`" :alt="movie.title">
+    </figure>
+    <div class="info">
+    <!-- 데이터를 표시할 때 중괄호 두개 -->
+    <!-- 속성에 값을 바인딩할 때 앞에 콜론(:)을 붙여주면 됨 :속성명="데이터" -->
+      <h3 class="bg-yellow" :style="textRed">{{ movie.title }}</h3>
+      <p>개봉: {{ movie.year }}</p>
+      <p>장르: {{ movie.category }}</p>
+      <!-- v-on:이벤트명="실행코드, v-on 축약식: @로 대체 가능 -->
+      <!-- 코드가 짧을 경우 바로 추가 -->
+      <!-- <button @:click="like++">좋아요</button> <span>{{ like }}</span> -->
+      <!-- 버튼을 눌렀을 때 인덱스 값을 전달해야 함 -->
+      <button @:click="increaseLike(i)">좋아요</button>
+      <span>{{ movie.like }}</span>
+      <p>
+        <button @click="isModal=true">상세보기</button>
+      </p>
+    </div>
+  </div>
   <!-- 반복문(배열의 자료명, 인덱스) -->
   <!-- <p v-for="(item, i) in foods" :key="i">{{ item }}</p> -->
+  <div class="modal" v-if="isModal">
+    <div class="inner">
+      <h3>영화 상세정보</h3>
+      <button @click="isModal=false">닫기</button>
+    </div>
+  </div>
 </template>
 
 
@@ -23,13 +38,16 @@ export default { // 안에 기능 정의
   name: 'App', // 컴포넌트명
   data() {  // 문서에 표시될 상태 변수
     return { // return 안에 변수 정의
+      isModal: false,
       data: [
         {
-          title: "노랑",
+          title: "노량",
           year: 2023,
           category: "액션, 드라마",
           textRed: "color: red",
           like: 0,
+          imgUrl: "./assets/노량.jpg"
+
         },
         {
           title: "아쿠아맨과 로스트 킹덤",
@@ -37,13 +55,15 @@ export default { // 안에 기능 정의
           category: "액션, 판타지, 어드벤처",
           textRed: "color: red",
           like: 0,
+          imgUrl: "./assets/아쿠아맨.jpg"
         },
         {
-          title: "아쿠아맨과 로스트 킹덤",
+          title: "3일의 휴가",
           year: 2023,
           category: "액션, 판타지, 어드벤처",
           textRed: "color: red",
           like: 0,
+          imgUrl: "./assets/3일의휴가.jpg"
         },
       ]
     }
@@ -58,8 +78,69 @@ export default { // 안에 기능 정의
 </script>
 
 <style>
-  .bg-yellow {
-    background: gold;
-    padding: 10px;
+  * {
+    box-sizing: border-box;
+    margin: 0;
+  }
+
+  body {
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin-bottom: 1rem;
+  }
+
+  p {
+    margin-bottom: 0.5rem;
+  }
+
+  button {
+    margin-right: 10px;
+    margin-top: 1rem;
+  }
+
+  .item {
+    width: 100%;
+    border: 1px solid #ccc;
+    display: flex;
+    margin-bottom: 20px;
+    padding: 1rem;
+  }
+
+  .item figure {
+    width: 30%;
+    margin-right: 1rem;
+  }
+
+  .item img {
+    width: 100%;
+  }
+
+  .item .info {
+    width: 100%;
+  }
+
+  .modal {
+    background: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal .inner {
+    background: #fff;
+    width: 80%;
+    padding: 20px;
+    border-radius: 10px;
   }
 </style>
