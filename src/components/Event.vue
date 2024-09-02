@@ -1,6 +1,8 @@
 <template>
-  <div class="event">
+  <!-- show라는 클래스명이 참일 때 추가-->
+  <div class="event" :class="{show : isOpen}">
     <p>{{ text }}</p>
+    <button @click="isOpen=false">X</button>
   </div>
 </template>
 
@@ -10,6 +12,11 @@
     props: {
       // 변수명: 자료형
       text: String,
+    },
+    data() {
+      return {
+        isOpen: true
+      }
     }
   }
 </script>
@@ -21,9 +28,21 @@
     padding: 10px 20px;
     text-align: center;
     font-size: small;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    display: none;
+  }
+
+  .show {
+    display: flex;
   }
 
   .event p {
+    margin: 0;
+  }
+
+  .event button {
     margin: 0;
   }
 </style>
