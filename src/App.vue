@@ -34,38 +34,16 @@
 
 
 <script> // 문서에 보여질 데이터를 작성할 때 script 안에 작성
+// import { 가져올 변수명1, 변수명2 } from '경로' 가져오는 변수가 하나일 때
+// import 가져올 변수명 from '경로' 가져오는 변수가 하나일 때
+import data from './assets/movies';
+console.log(data);
 export default { // 안에 기능 정의
   name: 'App', // 컴포넌트명
   data() {  // 문서에 표시될 상태 변수
     return { // return 안에 변수 정의
       isModal: false,
-      data: [
-        {
-          title: "노량",
-          year: 2023,
-          category: "액션, 드라마",
-          textRed: "color: red",
-          like: 0,
-          imgUrl: "./assets/노량.jpg"
-
-        },
-        {
-          title: "아쿠아맨과 로스트 킹덤",
-          year: 2023,
-          category: "액션, 판타지, 어드벤처",
-          textRed: "color: red",
-          like: 0,
-          imgUrl: "./assets/아쿠아맨.jpg"
-        },
-        {
-          title: "3일의 휴가",
-          year: 2023,
-          category: "액션, 판타지, 어드벤처",
-          textRed: "color: red",
-          like: 0,
-          imgUrl: "./assets/3일의휴가.jpg"
-        },
-      ]
+      data: data,
     }
   },
   methods: { // 함수 추가 가능
