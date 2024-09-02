@@ -1,6 +1,10 @@
 <template>
   <!--  데이터 바인딩 : html 안에 데이터를 넣는것-->
+  <Navbar />
+  <!-- 속성명(props 변수="보낼 값" -->
+  <Event :text="text"/>
   <h1>영화정보</h1>
+  <!-- 반복문(배열의 자료명, 인덱스) -->
   <div v-for="(movie, i) in data" :key="i" class="item">
     <figure>
       <img :src="`${movie.imgUrl}`" :alt="movie.title">
@@ -22,15 +26,7 @@
       </p>
     </div>
   </div>
-  <!-- 반복문(배열의 자료명, 인덱스) -->
-  <!-- <p v-for="(item, i) in foods" :key="i">{{ item }}</p> -->
-  <div class="modal" v-if="isModal">
-    <div class="inner">
-      <h3>{{ data[selectedMovie].title }}</h3>
-      <p>영화 상세정보</p>
-      <button @click="isModal=false">닫기</button>
-    </div>
-  </div>
+<!--  <Modal />-->
 </template>
 
 
@@ -38,6 +34,9 @@
 // import { 가져올 변수명1, 변수명2 } from '경로' 가져오는 변수가 하나일 때
 // import 가져올 변수명 from '경로' 가져오는 변수가 하나일 때
 import data from './assets/movies';
+import Navbar from "./components/Navbar.vue";
+// import Modal from "./components/Modal.vue";
+import Event from "./components/Event.vue"; //이벤트 박스
 console.log(data);
 
 export default { // 안에 기능 정의
@@ -47,6 +46,7 @@ export default { // 안에 기능 정의
       isModal: false,
       data: data,
       selectedMovie: 0,
+      text: "NEPLIX 강렬한 운명의 드라마!!!"
     }
   },
   methods: { // 함수 추가 가능
@@ -54,6 +54,12 @@ export default { // 안에 기능 정의
       // 객체 안에 있는 like 변수를 찾아야 , 객체 내부에서 사용하는 변수는 앞에 this를 붙여야 함
       this.data[i].like += 1
     }
+  },
+  components: {
+    // 변수명: import로 불러온 컴포넌트명(같은 이름으로 하는것이 관례)
+    Navbar: Navbar,
+    // Modal: Modal,
+    Event: Event,
   }
 }
 </script>
