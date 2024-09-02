@@ -3,6 +3,7 @@
   <Navbar />
   <!-- 속성명(props 변수="보낼 값" -->
   <Event :text="text"/>
+  <SearchBar />
   <Movies
       :data="data"
       @openModal="isModal=true;selectedMovie=$event"
@@ -26,6 +27,7 @@ import Navbar from "./components/Navbar.vue";
 import Modal from "./components/Modal.vue";
 import Event from "./components/Event.vue"; //이벤트 박스
 import Movies from "./components/Movies.vue";
+import SearchBar from "./components/SearchBar.vue";
 console.log(data);
 
 export default { // 안에 기능 정의
@@ -50,6 +52,7 @@ export default { // 안에 기능 정의
     Modal: Modal,
     Event: Event,
     Movies: Movies,
+    SearchBar: SearchBar,
   }
 }
 </script>
