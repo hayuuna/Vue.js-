@@ -26,7 +26,13 @@
       </p>
     </div>
   </div>
-<!--  <Modal />-->
+  <!-- closeModal이벤트를 전달받아 상태 변경 -->
+  <Modal
+      :data="data"
+      :isModal="isModal"
+      :selectedMovie="selectedMovie"
+      @closeModal="isModal=false"
+  />
 </template>
 
 
@@ -35,7 +41,7 @@
 // import 가져올 변수명 from '경로' 가져오는 변수가 하나일 때
 import data from './assets/movies';
 import Navbar from "./components/Navbar.vue";
-// import Modal from "./components/Modal.vue";
+import Modal from "./components/Modal.vue";
 import Event from "./components/Event.vue"; //이벤트 박스
 console.log(data);
 
@@ -58,7 +64,7 @@ export default { // 안에 기능 정의
   components: {
     // 변수명: import로 불러온 컴포넌트명(같은 이름으로 하는것이 관례)
     Navbar: Navbar,
-    // Modal: Modal,
+    Modal: Modal,
     Event: Event,
   }
 }
