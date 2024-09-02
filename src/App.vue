@@ -3,9 +3,15 @@
   <Navbar />
   <!-- 속성명(props 변수="보낼 값" -->
   <Event :text="text"/>
-  <SearchBar />
+  <SearchBar
+      :data="data_temp"
+      @searchMovie="searchMovie($event)"
+  />
+  <p>
+    <button @click="showAllMovie">전체보기</button>
+  </p>
   <Movies
-      :data="data"
+      :data="data_temp"
       @openModal="isModal=true;selectedMovie=$event"
       @increaseLike="increaseLike($event)"
   />
@@ -18,7 +24,6 @@
   />
 </template>
 
-
 <script> // 문서에 보여질 데이터를 작성할 때 script 안에 작성
 // import { 가져올 변수명1, 변수명2 } from '경로' 가져오는 변수가 하나일 때
 // import 가져올 변수명 from '경로' 가져오는 변수가 하나일 때
@@ -28,14 +33,14 @@ import Modal from "./components/Modal.vue";
 import Event from "./components/Event.vue"; //이벤트 박스
 import Movies from "./components/Movies.vue";
 import SearchBar from "./components/SearchBar.vue";
-console.log(data);
 
 export default { // 안에 기능 정의
   name: 'App', // 컴포넌트명
   data() {  // 문서에 표시될 상태 변수
     return { // return 안에 변수 정의
       isModal: false,
-      data: data,
+      data: data, // 원본
+      data_temp: [...data], // 사본
       selectedMovie: 0,
       text: "NEPLIX 강렬한 운명의 드라마!!!"
     }
@@ -44,6 +49,15 @@ export default { // 안에 기능 정의
     increaseLike(i) {
       // 객체 안에 있는 like 변수를 찾아야 , 객체 내부에서 사용하는 변수는 앞에 this를 붙여야 함
       this.data[i].like += 1
+    },
+    searchMovie(title) {
+      // 영화 제목이 포함된 데이터를 가져옴
+      this.data_temp = this.data.filter(movie => {
+        return movie.title.includes(title);
+      })
+    },
+    showAllMovie() {
+      this.data_temp = [...this.data]
     }
   },
   components: {
